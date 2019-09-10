@@ -1,4 +1,4 @@
-package algorithmic_analysis;
+package week_1.algorithmic_analysis;
 
 public class Main {
 
