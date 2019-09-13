@@ -1,5 +1,8 @@
 package week_1.algorithmic_analysis;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main {
 
     public static void main(String[] args) {}
@@ -22,7 +25,7 @@ public class Main {
     /*
     Take a look at the below snippet of code.  What is its complexity?
      */
-    void functionOne() {
+    private void functionOne() {
         System.out.println("Hello world!");
     }
 
@@ -32,7 +35,7 @@ public class Main {
     could take 4 hours to print or 1 second -- still O(1).  Now try the
     below.
      */
-    void functionTwo() {
+    private void functionTwo() {
         for(int i = 0; i < 1000000; i++) {
             System.out.println("Hello world!");
         }
@@ -42,7 +45,7 @@ public class Main {
     Still O(1)!  Again, we did not reference the input on this at all.
     Try the next one.
      */
-    void functionThree(int n) {
+    private void functionThree(int n) {
         for(int i = 0; i < n; i++) {
             System.out.println("Hello world!");
         }
@@ -58,7 +61,7 @@ public class Main {
     /*
     What happens when we put things next to each other?
      */
-    void functionFour(int n) {
+    private void functionFour(int n) {
         for(int i = 0; i < 1000000; i++) {
             System.out.println("Hello world!");
         }
@@ -80,7 +83,7 @@ public class Main {
     /*
     Now what happens when we start nesting runtimes?
      */
-    void functionFive(int n) {
+    private void functionFive(int n) {
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < n; j++) {
                 System.out.println("Hello world!");
@@ -96,7 +99,7 @@ public class Main {
     /*
     Try this one, it's a little trickier.
      */
-    void functionSix(int n) {
+    private void functionSix(int n) {
         for(int i = 0; i < n; i++) {
             for(int j = 0; j <= i; j++) {
                 System.out.println("Hello world!");
@@ -119,7 +122,7 @@ public class Main {
     is half that of the square so it's O((n^2)/2) which is still O(n^2).
      */
 
-    void functionSeven(int n) {
+    private void functionSeven(int n) {
         for(int i = 0; i < n; i += 5) {
             System.out.println("Hello world!");
         }
@@ -133,7 +136,7 @@ public class Main {
     change the runtime.
      */
 
-    void functionEight(int n) {
+    private void functionEight(int n) {
         for(int i = 1; i < n; i *= 2) {
             System.out.println("Hello world!");
         }
@@ -151,5 +154,67 @@ public class Main {
     This is clearly powers of two.  If you want to know how many powers of a
     number it will take to get somewhere, you take the log of that number.
     So, this is actually log2(n), or generally log(n).
+     */
+
+    /*
+    Now what about recursion?
+     */
+    private void functionNine(int n) {
+        if(n == 1)
+            return;
+        functionNine(n - 1);
+    }
+
+    /*
+    Just linear time.  We go from n all the way down to 1 just with a series
+    of recursive operations.
+     */
+
+    /*
+    How about fibonacci?
+     */
+    private int functionTen(int n) {
+        if (n <= 1) {
+            return n;
+        }
+        return functionTen(n - 1) + functionTen(n - 2);
+    }
+
+    /*
+    This function opens up like a binary tree.  Every iteration of the algorithm
+    opens two paths, and each of those opens two more and so on.
+
+                    n
+                  /   \
+              n - 1     n - 2
+            /     \   /     \
+              ...
+
+    So, we can say that the runtime of this algorithm is 2^n.
+     */
+
+    /*
+    Now with memoization?
+     */
+    private static Map<Integer, Integer> memo = new HashMap<>(){{
+        put(0 ,0);
+        put(1, 1);
+    }};
+    private int functionEleven(int n) {
+        if(memo.get(n) != null) {
+            return memo.get(n);
+        }
+        int result = functionEleven(n - 1) + functionEleven(n - 2);
+        memo.put(n, result);
+        return result;
+    }
+
+    /*
+    Memoization is a very popular way of pruning the tree produced
+    by algorithms with multiple recursive paths. You do so by recalling
+    work that you've already done with a memo, which must be shared somehow
+    between calls.
+
+    This gets the runtime down to linear O(n) time.
      */
 }
