@@ -1,4 +1,4 @@
-package week_1.algorithmic_analysis;
+package week_1.module_000_complexity;
 
 import java.util.HashMap;
 import java.util.Map;

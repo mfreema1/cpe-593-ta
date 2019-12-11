@@ -1,4 +1,4 @@
-package week_1.strings;
+package week_1.module_002_strings;
 
 public class Main {
 

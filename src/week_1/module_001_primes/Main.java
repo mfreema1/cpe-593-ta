@@ -1,4 +1,4 @@
-package week_1.primes;
+package week_1.module_001_primes;
 
 public class Main {
 
